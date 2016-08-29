@@ -75,3 +75,7 @@ export const createProducts = (product) => ({
 - **method[String]**: HTTP Method, default: GET.
 - **onSuccess[Function]**: Success callback function, you can do something without store dispatch (eg. dispatch redirect react-router-redux action).
 - **onFailed[Function]**: Failed callback function.
+
+## To-Do
+
+- [ ] Mocks Service / API Simulator
