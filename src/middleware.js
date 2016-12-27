@@ -1,5 +1,6 @@
 /* global API_HOST:false */
 import _ from 'lodash';
+import qs from 'querystring';
 
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
@@ -23,6 +24,7 @@ export default () => next => async action => {
     method,
     onSuccess,
     onFailed,
+    urlEncoded,
   } = requestOptions;
 
   const dispatchPayload = _.omit((requestOptions.dispatchPayload || {}), 'type');
@@ -58,6 +60,12 @@ export default () => next => async action => {
   if (json) {
     fetchOptions.headers['Content-Type'] = 'application/json';
     fetchOptions.body = JSON.stringify(body || {});
+  }
+
+  // x-www-form-urlencoded
+  if (urlEncoded) {
+    fetchOptions.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    fetchOptions.body = qs.stringify(body || {});
   }
 
   // FormData

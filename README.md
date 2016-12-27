@@ -69,8 +69,9 @@ export const createProducts = (product) => ({
 - **types[Array]**: Array of dispatch action, support every types (eg. String, Symbol), action will be called on [REQUEST_SUCCESS, (REQUEST_FAILED), (REQUEST_SENT)].
 - **entrypoint[String]**: API resource url, fetch will add host declared in global ```API_HOST``` constant automatically.
 - **auth[Boolean]**: If true, JWT Token will add to fetch request in headers ```Authorization``` value. Token should be storage in ```localStorage.accessToken```.
-- **json[Boolean]**: If true, body will be JSON stringified text. (Don't use json and formData both)
-- **formData[Boolean]**: If true, body will append to FormData by assigned keys. (Don't use json and formData both)
+- **json[Boolean]**: If true, body will be JSON stringified text. (Don't use json, urlEncoded and formData at same time)
+- **formData[Boolean]**: If true, body will append to FormData by assigned keys. (Don't use json, urlEncoded and formData at same time)
+- **urlEncoded[Boolean]**: If true, body will be x-www-form-urlencoded and stringify by querystring module. (Don't use json, urlEncoded and formData at same time)
 - **body[Object]**: Key-value paired post data.
 - **method[String]**: HTTP Method, default: GET.
 - **onSuccess[Function]**: Success callback function, you can do something without store dispatch (eg. dispatch redirect react-router-redux action).
