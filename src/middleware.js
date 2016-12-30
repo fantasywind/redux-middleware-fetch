@@ -1,6 +1,6 @@
 /* global API_HOST:false */
 import _ from 'lodash';
-import qs from 'querystring';
+import qs from 'qs';
 
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
