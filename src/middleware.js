@@ -2,10 +2,16 @@
 import _ from 'lodash';
 import qs from 'qs';
 
+let HOST = API_HOST || '/api';
+
 export const API_REQUEST = Symbol('API_REQUEST');
 export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
 export const API_REQUEST_SENT = Symbol('API_REQUEST_SENT');
 export const API_FINISHED = Symbol('API_FINISHED');
+
+export function setAPIHost(API_HOST) {
+  HOST = API_HOST;
+}
 
 export default () => next => async action => {
   const requestOptions = action[API_REQUEST];
@@ -25,6 +31,7 @@ export default () => next => async action => {
     onSuccess,
     onFailed,
     urlEncoded,
+    fqdn,
   } = requestOptions;
 
   const dispatchPayload = _.omit((requestOptions.dispatchPayload || {}), 'type');
@@ -99,7 +106,7 @@ export default () => next => async action => {
       type: API_REQUEST_SENT,
     });
 
-    response = await fetch(`${API_HOST}${entrypoint}`, fetchOptions);
+    response = await fetch(`${(fqdn || HOST)}${entrypoint}`, fetchOptions);
 
     // Request Animation End
     next({
