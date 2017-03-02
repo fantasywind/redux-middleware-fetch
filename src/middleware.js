@@ -4,10 +4,10 @@ import qs from 'qs';
 
 let HOST = API_HOST || '/api';
 
-export const API_REQUEST = Symbol('API_REQUEST');
-export const NO_TOKEN_STORED = Symbol('NO_TOKEN_STORED');
-export const API_REQUEST_SENT = Symbol('API_REQUEST_SENT');
-export const API_FINISHED = Symbol('API_FINISHED');
+export const API_REQUEST = 'REDUX_MIDDLEWARE_FETCH/API_REQUEST';
+export const NO_TOKEN_STORED = 'REDUX_MIDDLEWARE_FETCH/NO_TOKEN_STORED';
+export const API_REQUEST_SENT = 'REDUX_MIDDLEWARE_FETCH/API_REQUEST_SENT';
+export const API_FINISHED = 'REDUX_MIDDLEWARE_FETCH/API_FINISHED';
 
 export function setAPIHost(API_HOST) {
   HOST = API_HOST;
