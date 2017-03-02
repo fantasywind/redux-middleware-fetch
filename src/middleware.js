@@ -2,7 +2,11 @@
 import _ from 'lodash';
 import qs from 'qs';
 
-let HOST = API_HOST || '/api';
+let HOST = '/api';
+
+if (typeof API_HOST !== 'undefined') {
+  HOST = API_HOST;
+}
 
 export const API_REQUEST = 'REDUX_MIDDLEWARE_FETCH/API_REQUEST';
 export const NO_TOKEN_STORED = 'REDUX_MIDDLEWARE_FETCH/NO_TOKEN_STORED';
