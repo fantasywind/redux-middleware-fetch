@@ -64,6 +64,21 @@ export const createProducts = (product) => ({
 });
 ```
 
+### Customize Storage
+
+In default, redux-middleware-fetch use localStorage for storage accessToken (in key __accessToken__). You can change any other storage system implemented __getItem__ and __setItem__ functions for it.
+
+```
+import {
+  SimpleStorage,
+  setStorage,
+} from 'redux-middleware-fetch';
+
+const storage = new SimpleStorage();
+
+setStorage(storage);
+```
+
 ## Options
 
 - **types[Array]**: Array of dispatch action, support every types (eg. String, Symbol), action will be called on [REQUEST_SUCCESS, (REQUEST_FAILED), (REQUEST_SENT)].

@@ -4,6 +4,24 @@ import qs from 'qs';
 
 let HOST = '/api';
 
+export class SimpleStorage {
+  getItem(key) {
+    return this[key];
+  }
+
+  setItem(key, value) {
+    this[key] = value;
+  }
+}
+
+let storage;
+
+if (typeof localStorage !== 'undefined') {
+  storage = localStorage;
+} else {
+  storage = new SimpleStorage();
+}
+
 if (typeof API_HOST !== 'undefined') {
   HOST = API_HOST;
 }
@@ -15,6 +33,14 @@ export const API_FINISHED = 'REDUX_MIDDLEWARE_FETCH/API_FINISHED';
 
 export function setAPIHost(API_HOST) {
   HOST = API_HOST;
+}
+
+export function setToken(token) {
+  storage.setItem('accessToken', token);
+}
+
+export function setStorage(customStorage) {
+  storage = customStorage;
 }
 
 export default () => next => async action => {
@@ -56,7 +82,7 @@ export default () => next => async action => {
 
   // Inject JWT Token
   if (auth) {
-    const token = localStorage.getItem('accessToken');
+    const token = storage.getItem('accessToken');
 
     if (token) {
       fetchOptions.headers.Authorization = token;
