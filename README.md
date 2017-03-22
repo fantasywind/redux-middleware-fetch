@@ -91,6 +91,7 @@ setStorage(storage);
 - **method[String]**: HTTP Method, default: GET.
 - **onSuccess[Function]**: Success callback function, you can do something without store dispatch (eg. dispatch redirect react-router-redux action).
 - **onFailed[Function]**: Failed callback function.
+- **headers[Object]**: Custom headers in object.
 
 ## To-Do
 

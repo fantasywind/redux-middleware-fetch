@@ -62,9 +62,11 @@ export default () => next => async action => {
     onFailed,
     urlEncoded,
     fqdn,
+    headers,
   } = requestOptions;
 
   const dispatchPayload = _.omit((requestOptions.dispatchPayload || {}), 'type');
+  const customHeaders = headers || {};
 
   const [
     successType,
@@ -77,6 +79,7 @@ export default () => next => async action => {
     method: method || 'GET',
     headers: {
       Accept: 'application/json',
+      ...customHeaders,
     },
   };
 
