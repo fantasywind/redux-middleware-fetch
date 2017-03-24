@@ -147,7 +147,9 @@ export default () => next => async action => {
     });
 
     if (response.ok) {
-      if (response.status !== 204) {
+      if (response.status === 204) {
+        response = {};
+      } else {
         response = await response.json();
       }
     } else {
