@@ -89,10 +89,6 @@ export default () => next => async action => {
 
     if (token) {
       fetchOptions.headers.Authorization = token;
-    } else {
-      return next({
-        type: NO_TOKEN_STORED,
-      });
     }
   }
 

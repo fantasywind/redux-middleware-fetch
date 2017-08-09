@@ -1,6 +1,6 @@
 {
   "name": "redux-middleware-fetch",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Redux Whatwg Fetch Middleware",
   "main": "lib/middleware.js",
   "scripts": {
