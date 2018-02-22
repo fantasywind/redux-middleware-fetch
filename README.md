@@ -93,6 +93,29 @@ setStorage(storage);
 - **onFailed[Function]**: Failed callback function.
 - **headers[Object]**: Custom headers in object.
 
+## Event Listener
+
+```
+import {
+  requestListener,
+  EVENT_REQUESTED,
+  EVENT_REQUEST_SUCCESSED,
+  EVENT_REQUEST_FAILED,
+} from 'redux-middleware-fetch';
+
+requestListener.on(EVENT_REQUESTED, () => {
+  // do something on request sent
+});
+
+requestListener.on(EVENT_REQUEST_SUCCESSED, () => {
+  // do something on request successed
+});
+
+requestListener.on(EVENT_REQUEST_FAILED, () => {
+  // do something on request failed
+});
+```
+
 ## To-Do
 
 - [ ] Mocks Service / API Simulator

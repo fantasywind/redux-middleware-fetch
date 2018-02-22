@@ -1,6 +1,7 @@
 /* global API_HOST:false */
 import _ from 'lodash';
 import qs from 'qs';
+import { EventEmitter } from 'events';
 
 let HOST = '/api';
 
@@ -42,6 +43,12 @@ export function setToken(token) {
 export function setStorage(customStorage) {
   storage = customStorage;
 }
+
+export const EVENT_REQUESTED = 'EVENT/REQUESTED';
+export const EVENT_REQUEST_SUCCESSED = 'EVENT/REQUEST_SUCCESSED';
+export const EVENT_REQUEST_FAILED = 'EVENT/REQUEST_FAILED';
+
+export const requestListener = new EventEmitter();
 
 export default () => next => async action => {
   const requestOptions = action[API_REQUEST];
@@ -135,6 +142,8 @@ export default () => next => async action => {
       type: API_REQUEST_SENT,
     });
 
+    requestListener.emit(EVENT_REQUESTED);
+
     response = await fetch(`${(fqdn || HOST)}${entrypoint}`, fetchOptions);
 
     // Request Animation End
@@ -143,12 +152,16 @@ export default () => next => async action => {
     });
 
     if (response.ok) {
+      requestListener.emit(EVENT_REQUEST_SUCCESSED, response);
+
       if (response.status === 204) {
         response = {};
       } else {
         response = await response.json();
       }
     } else {
+      requestListener.emit(EVENT_REQUEST_FAILED, response);
+
       response = await response.json();
 
       next({
