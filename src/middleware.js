@@ -142,7 +142,7 @@ export default () => next => async action => {
       type: API_REQUEST_SENT,
     });
 
-    requestListener.emit(EVENT_REQUESTED);
+    requestListener.emit(EVENT_REQUESTED, requestOptions);
 
     response = await fetch(`${(fqdn || HOST)}${entrypoint}`, fetchOptions);
 

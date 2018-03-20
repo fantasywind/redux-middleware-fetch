@@ -103,15 +103,15 @@ import {
   EVENT_REQUEST_FAILED,
 } from 'redux-middleware-fetch';
 
-requestListener.on(EVENT_REQUESTED, () => {
+requestListener.on(EVENT_REQUESTED, (reqOptions) => {
   // do something on request sent
 });
 
-requestListener.on(EVENT_REQUEST_SUCCESSED, () => {
+requestListener.on(EVENT_REQUEST_SUCCESSED, (response) => {
   // do something on request successed
 });
 
-requestListener.on(EVENT_REQUEST_FAILED, () => {
+requestListener.on(EVENT_REQUEST_FAILED, (response) => {
   // do something on request failed
 });
 ```
