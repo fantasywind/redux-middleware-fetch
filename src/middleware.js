@@ -164,11 +164,13 @@ export default () => next => async action => {
 
       response = await response.json();
 
-      next({
-        type: errorType,
-        error: response.message,
-        ...response,
-      });
+      if (errorType) {
+        next({
+          type: errorType,
+          error: response.message,
+          ...response,
+        });
+      }
 
       if (onFailed) {
         onFailed(response.message);
